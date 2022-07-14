@@ -1,9 +1,46 @@
+import { getQueriesForElement } from "@testing-library/react";
 import React from "react";
+import{useState} from "react";
 
-const Button=(props)=>{
+const Button=({children, onClick, getQuote })=>{
+    const [coords, setCoords] = React.useState({ x: -1, y: -1 });
+    const [isRippling, setIsRippling] = React.useState(false);
    
+    React.useEffect(() => {
+        if (coords.x !== -1 && coords.y !== -1) {
+          setIsRippling(true);
+          setTimeout(() => setIsRippling(false), 300);
+        } else setIsRippling(false);
+      }, [coords]);
+    
+      React.useEffect(() => {
+        if (!isRippling) setCoords({ x: -1, y: -1 });
+      }, [isRippling]);
+    
     return(
-        <button  onClick={props.handleClick} style={props.style.button}>Click me</button>
+        <button
+        className="ripple-button"
+        onClick={e => {
+          const rect = e.target.getBoundingClientRect();
+          getQuote();
+          setCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });          
+          onClick && onClick(e);
+          
+        }} 
+      > Click me!
+        {isRippling ? (
+          <span
+            className="ripple"
+            style={{
+              left: coords.x,
+              top: coords.y
+            }}
+          />
+        ) : (
+          ''
+        )}
+        <span className="content">{children}</span>
+      </button>
     );
 }
 export default Button;

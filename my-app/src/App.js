@@ -23,7 +23,8 @@ function App() {
     backgroundColor: '#7e27ed',
     borderRadius: '12px',
     border: '1px solid #4a179e',
-    color:'#a3aec4',
+    color:'#fdfbfb',
+    padding:'10px'
     }
   }
    const[message, setMessage]=useState('Press the button to get a random fact !')
