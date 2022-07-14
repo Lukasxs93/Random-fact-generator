@@ -12,10 +12,10 @@ const Container =(props)=>{
         console.log(data)});
     }
     return(
-        <div className="container" id="container">
+        <div className="container" id="container" style={props.styles.div}>
             <h2>Did You know ?</h2>
            <p>{props.message}</p>
-           <Button handleClick={handleClick}/>
+           <Button handleClick={handleClick} style={props.styles}/>
         </div>
     );
 }
