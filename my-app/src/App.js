@@ -5,8 +5,10 @@ import './App.css';
 function App() {
   const styles = {
    
-    div:{    
+    div:{      
+      
       display:"flex",
+     
       flexDirection:"column",
       justifyContent:"center",
       alignItems:"center",
